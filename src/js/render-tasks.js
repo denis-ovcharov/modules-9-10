@@ -1,15 +1,15 @@
-import { addTask, deleteTask, saveToLS, loadFromLS } from "./markup-tasks.js";
-import { refs } from "./refs.js";
+import { refs } from './refs';
 
-refs.headerForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(refs.headerForm);
-    const itemInfo = Object.fromEntries(formData.entries());
-    addTask(itemInfo.taskName, itemInfo.taskDescription);
-    refs.headerForm.reset();
-});
-
-refs.deleteBtn.addEventListener('click', () => {
-    
-})
+export function renderTaskList(tasks) {
+  const markup = tasks
+    .map(
+      ({ name, description, id }) => `
+    <li class="task-list-item">
+    <button class="task-list-item-btn" data-id="${id}">Delete</button>
+    <h3>${name}</h3>
+    <p>${description}</p>
+    </li>;`
+    )
+    .join('');
+  refs.taskList.innerHTML = markup;
+}

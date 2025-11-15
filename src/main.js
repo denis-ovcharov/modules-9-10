@@ -14,9 +14,14 @@
       <p>Текст</p>
   </li>
 */
-import "./js/refs";
-import "./js/markup-tasks";
-import "./js/render-tasks";
-import "./js/theme-switcher";
-import "./js/tasks";
-import "./js/local-storage-api";
+
+import { onTaskFromSubmit } from './js/handlers';
+import { refs } from './js/refs';
+import localStorageApi from './js/local-storage-api';
+import { renderTaskList } from './js/render-tasks';
+
+localStorageApi.initTasks();
+
+renderTaskList(localStorageApi.getTasks());
+
+refs.taskForm.addEventListener('submit', onTaskFromSubmit);
